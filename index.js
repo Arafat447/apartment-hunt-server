@@ -89,7 +89,7 @@ client.connect(err => {
 
 
 app.get('/', (req, res) =>{
-    res.send('I am working');
+    res.send('server is up and running');
 })
 
 
