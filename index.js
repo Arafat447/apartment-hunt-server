@@ -50,7 +50,7 @@ client.connect(err => {
 
     // get houses 
     app.get('/houses', (req, res) =>{
-        houseCollection.find({})
+        houseCollection.find({}).limit(6)
         .toArray((err, documents) =>{
             res.send(documents);
         }) 
