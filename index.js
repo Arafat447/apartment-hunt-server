@@ -10,10 +10,6 @@ app.use(cors());
 const port = 5000;
 
 
-//apartmentHunt5101
-// hfzc0nS6wreGbJFs
-
-
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.jo990.mongodb.net/apartmentHunt?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -51,4 +47,4 @@ app.get('/', (req, res) =>{
 })
 
 
-app.listen(port)
+app.listen(process.env.PORT || port)
