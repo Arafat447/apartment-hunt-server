@@ -19,6 +19,7 @@ client.connect(err => {
 
       const houseCollection = client.db("apartmentHunt").collection("houses");
       const bookingCollection = client.db("apartmentHunt").collection("bookings");
+      const adminCollection = client.db("apartmentHunt").collection("admins");
 
       console.log('db - connected')
 
@@ -82,6 +83,25 @@ client.connect(err => {
     })
 
 
+    // add Admin 
+    app.post('/addAdmin', (req, res) =>{
+      const admin = req.body;
+      adminCollection.insertOne(admin)
+      .then(result =>{
+          res.send(result.insertedCount > 0);
+      })
+    })
+
+
+    // get admin by email
+    app.get('/admin/:email', (req, res) =>{
+      adminCollection.find({email: req.params.email})
+      .toArray((err, documents) =>{
+        res.send(documents.length > 0)
+      })
+    })
+
+    
 
 
 });
