@@ -24,7 +24,7 @@ client.connect(err => {
     const house = req.body;
     houseCollection.insertOne(house)
     .then(result =>{
-        res.send(result.insertedCount);
+        res.send(result.insertedCount > 0);
     })
   })
 
@@ -37,6 +37,15 @@ app.get('/houses', (req, res) =>{
     }) 
 })
 
+// get houses by name from database
+app.get('/house/:name', (req, res) =>{
+  houseCollection.find({name: req.params.name})
+.toArray((err, documents) =>{
+  res.send(documents)
+})
+
+})
+
 
 });
 
@@ -47,4 +56,4 @@ app.get('/', (req, res) =>{
 })
 
 
-app.listen(process.env.PORT || port)
+app.listen(port)
