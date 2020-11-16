@@ -77,20 +77,22 @@ client.connect(err => {
       })
     })
 
-    // get bookings 
+  
+    // get bookings by email
     app.get('/bookings', (req, res) =>{
-      bookingCollection.find({})
+      const email = req.query.email
+      adminCollection.find({ email : email })
+      .toArray((err, admin) =>{
+        const filter = {}
+        if(admin.length === 0){
+          filter.email = email;
+        }
+      bookingCollection.find(filter)
       .toArray((err, documents) =>{
           res.send(documents);
       }) 
     })
 
-    // get bookings by email
-    app.get('/bookings/:email', (req, res) =>{
-      bookingCollection.find({email: req.params.email})
-      .toArray((err, documents) =>{
-          res.send(documents);
-      }) 
     })
 
     // add Admin 
@@ -103,13 +105,15 @@ client.connect(err => {
     })
 
 
-    // get admin by email
-    app.get('/admin/:email', (req, res) =>{
-      adminCollection.find({email: req.params.email})
-      .toArray((err, documents) =>{
-        res.send(documents.length > 0)
+     // specified admin or user 
+    app.get('/isAdmin', (req, res) => {
+      adminCollection.find({ email: req.query.email })
+          .toArray((err, documents) => {
+              res.send(documents.length > 0)
+          })
       })
-    })
+
+
 
     
     // update user
