@@ -12,15 +12,6 @@ app.use(fileUpload())
 const port = 5000;
 
 
-// var MongoClient = require('mongodb').MongoClient;
-
-// var uri = "mongodb://<username>:<password>@cluster0-shard-00-00.jo990.mongodb.net:27017,cluster0-shard-00-01.jo990.mongodb.net:27017,cluster0-shard-00-02.jo990.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-ifk28h-shard-0&authSource=admin&retryWrites=true&w=majority";
-// MongoClient.connect(uri, function(err, client) {
-//   const collection = client.db("test").collection("devices");
-//   // perform actions on the collection object
-//   client.close();
-// });
-
 
 const uri = `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0-shard-00-00.jo990.mongodb.net:27017,cluster0-shard-00-01.jo990.mongodb.net:27017,cluster0-shard-00-02.jo990.mongodb.net:27017/apartmentHunt?ssl=true&replicaSet=atlas-ifk28h-shard-0&authSource=admin&retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
