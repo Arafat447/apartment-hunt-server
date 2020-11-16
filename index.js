@@ -3,7 +3,8 @@ const bodyParser = require ('body-parser');
 const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
 const fileUpload = require('express-fileupload');
-const e = require('express');
+const ObjectId = require('mongodb').ObjectId;
+
 require('dotenv').config();
 
 const app = express();
@@ -117,25 +118,15 @@ client.connect(err => {
 
     
     // update user
-    app.put('/status/:email', (req, res) => {
-      bookingCollection.findOneAndUpdate(
-        {
-          email: req.params.email
-        }, 
-        {
-          $set: {
-            status: req.body.status
-          }
-        },
-        {
-          upsert: true
-        }
-      )
-      .then(result =>{ 
-        res.send(true)
-      })
-      .catch(error => console.log(error))
-    })
+    app.patch('/update/:id', (req, res) => {
+      bookingCollection.updateOne({ _id: ObjectId(req.params.id) },
+          {
+              $set: { status: req.body.status }
+          })
+          .then(result => {
+              res.send(result.modifiedCount > 0)
+          })
+  })
 
 
 });
