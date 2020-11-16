@@ -3,6 +3,7 @@ const bodyParser = require ('body-parser');
 const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
 const fileUpload = require('express-fileupload');
+const e = require('express');
 require('dotenv').config();
 
 const app = express();
@@ -84,6 +85,13 @@ client.connect(err => {
       }) 
     })
 
+    // get bookings by email
+    app.get('/bookings/:email', (req, res) =>{
+      bookingCollection.find({email: req.params.email})
+      .toArray((err, documents) =>{
+          res.send(documents);
+      }) 
+    })
 
     // add Admin 
     app.post('/addAdmin', (req, res) =>{
