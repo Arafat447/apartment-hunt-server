@@ -7,6 +7,7 @@ get admin by email https://apartment-hunt-scic.herokuapp.com/email/{user-email}
 post house https://apartment-hunt-scic.herokuapp.com/addHouse
 post booking https://apartment-hunt-scic.herokuapp.com/addBooking
 post admin https://apartment-hunt-scic.herokuapp.com/addAdmin
+get user booking list https://apartment-hunt-scic.herokuapp.com/bookings/{user-email}
 
 update status by email https://apartment-hunt-scic.herokuapp.com/status/{user-email}
  
