@@ -30,21 +30,23 @@ client.connect(err => {
 
   // add house 
   app.post('/addHouse', (req, res) => {
+    const file = req.files.file;
     const title = req.body.title;
     const price = req.body.price;
     const location = req.body.location;
     const bedrooms = req.body.bedrooms;
     const bathrooms = req.body.bathrooms;
-
-    const file = req.files.imgFile;
     const newImg = file.data;
-    const conImg = newImg.toString('base64');
+    const encImg = newImg.toString('base64');
+
     const image = {
-      contentType: req.files.imgFile.mimetype,
-      size: req.files.imgFile.size,
-      img: Buffer.from(conImg, 'base64')
-    }
-    console.log({ title, price, location, bedrooms, bathrooms, image })
+      contentType: file.mimetype,
+      size: file.size,
+      img: Buffer.from(encImg, 'base64')
+    };
+    const src = image.img;
+
+    console.log({ title, price, location, bedrooms, bathrooms, src })
 
 
     houseCollection.insertOne({ title, price, location, bedrooms, bathrooms, image })
@@ -133,8 +135,6 @@ client.connect(err => {
         res.send(documents.length > 0)
       })
   })
-
-
 
 
   // update user
