@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
 const fileUpload = require('express-fileupload');
+const e = require('express');
 const ObjectId = require('mongodb').ObjectId;
 
 require('dotenv').config();
@@ -23,7 +24,7 @@ client.connect(err => {
   }
   const houseCollection = client.db("apartmentHunt").collection("houses");
   const bookingCollection = client.db("apartmentHunt").collection("bookings");
-  const adminCollection = client.db("apartmentHunt").collection("admins");
+  const adminCollection = client.db("apartmentHunt").collection("admin");
   const feedbackCollection = client.db("apartmentHunt").collection("userReview");
 
   console.log('db - connected')
@@ -130,8 +131,9 @@ client.connect(err => {
 
   // specified admin or user 
   app.get('/isAdmin', (req, res) => {
-    adminCollection.find({ email: req.query.email })
+      adminCollection.find({email: req.query.email})
       .toArray((err, documents) => {
+        console.log(documents)
         res.send(documents.length > 0)
       })
   })
