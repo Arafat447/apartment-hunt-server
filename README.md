@@ -6,7 +6,7 @@ A single page web application where user can book available house and place thei
 
 ### Features
 * Full-Stack web app, you have hassle free google sign in method.
-*	An authenticated user can order his/her desired services from our web apps.
+*	An authenticated user can booking his/her desired house from our web apps.
 *	Admin Dashboard / User Dashboard. (Role Detection based on email)
 *	User can review our services if he satisfied.
 *	Admin can create new service and he can be monitoring placed order status.
@@ -23,5 +23,6 @@ A single page web application where user can book available house and place thei
 
 [Front-end Repository](https://github.com/anik1612/apartment-hunt-frontend)
 
-
+## UI ScreenShot:
+<img src="https://i.ibb.co/kxMT0zd/apartment-hunt.png" alt="ui-screenshot"/>
 
